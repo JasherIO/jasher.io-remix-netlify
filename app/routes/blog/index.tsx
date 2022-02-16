@@ -1,25 +1,28 @@
-import { useLoaderData } from "remix";
+import { Link, useLoaderData } from "remix";
 import type { LoaderFunction } from "remix";
-import Section from "~/components/Section";
+import Main from "~/components/Main";
 import { get_posts } from "~/types/post";
+import type { Posts } from "~/types/post";
 
 export const loader: LoaderFunction = async () => {
-  const { GITHUB_TOKEN } = process.env;
-  
-  return get_posts(GITHUB_TOKEN);
+  return get_posts();
 };
 
 export default function Posts() {
-  const posts = useLoaderData();
+  const posts = useLoaderData<Posts>();
 
   return (
-    <Section>
+    <Main>
       <h1>Posts</h1>
       <ul>
         {posts.map((post : any) => (
-          <li key={post.name}>{post.name}</li>
+          <li key={post.frontmatter.title}>
+            <Link to={`/blog/${post.slug}`} prefetch="intent">
+              {post.frontmatter.title}
+            </Link>
+          </li>
         ))}
       </ul>
-    </Section>
+    </Main>
   );
 };
