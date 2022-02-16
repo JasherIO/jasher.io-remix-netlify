@@ -4,18 +4,16 @@ import Main from "~/components/Main";
 import { get_posts } from "~/types/post";
 import type { Posts } from "~/types/post";
 
-const _headers = {
-  "Cache-Control": "max-age: 10, s-maxage=10, stale-while-revalidate=60, stale-if-error: 3600"
-};
-
 export function headers () {
-  return _headers;
+  return {
+    "Cache-Control": { headers: { "Cache-Control": "max-age: 1440, s-maxage=1440, stale-while-revalidate=10800, stale-if-error: 43200" } }
+  };
 };
 
 export const loader: LoaderFunction = async () => {
   const posts = await get_posts();
 
-  return json(posts, { headers: _headers });
+  return json(posts, { headers: { "Cache-Control": "max-age: 60, s-maxage=60, stale-while-revalidate=300, stale-if-error: 600" } });
 };
 
 export default function Posts() {
