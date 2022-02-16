@@ -1,17 +1,21 @@
-import { Link, useLoaderData } from "remix";
+import { json, Link, useLoaderData } from "remix";
 import type { LoaderFunction } from "remix";
 import Main from "~/components/Main";
 import { get_posts } from "~/types/post";
 import type { Posts } from "~/types/post";
 
+const _headers = {
+  "Cache-Control": "max-age: 10, s-maxage=10, stale-while-revalidate=60, stale-if-error: 3600"
+};
+
 export function headers () {
-  return {
-    "Cache-Control": "max-age: 10, s-maxage=10, stale-while-revalidate=60, stale-if-error: 3600"
-  };
+  return _headers;
 };
 
 export const loader: LoaderFunction = async () => {
-  return get_posts();
+  const posts = await get_posts();
+
+  return json(posts, { headers: _headers });
 };
 
 export default function Posts() {
