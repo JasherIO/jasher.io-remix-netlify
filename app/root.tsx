@@ -15,12 +15,6 @@ import Footer from "~/components/Footer";
 import styles from "./tailwind.css";
 import { site, platforms } from "~/utilities/site";
 
-export function headers () {
-  return {
-    "Cache-Control": "max-age: 600, s-maxage=600, stale-while-revalidate=3600, stale-if-error: 10800"
-  };
-};
-
 export const meta: MetaFunction = ({ location, params } : { location: any, params: any }) => {
   // console.log(location, params);
   const twitter = platforms.find(platform => platform.name === "Twitter");
