@@ -4,12 +4,10 @@
   "description": "",
   "license": "",
   "scripts": {
-    "build": "run-p build:css build:remix",
+    "build": "npm run build:css && remix build",
     "build:css": "tailwindcss -o ./app/tailwind.css",
-    "build:remix": "remix build",
-    "dev": "cross-env NODE_ENV=development run-p dev:css dev:netlify",
+    "dev": "cross-env NODE_ENV=development concurrently \"npm run dev:css\" \"netlify dev\"",
     "dev:css": "tailwindcss -o ./app/tailwind.css --watch",
-    "dev:netlify": "netlify dev",
     "postinstall": "remix setup node"
   },
   "dependencies": {
@@ -27,8 +25,8 @@
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
+    "concurrently": "^7.0.0",
     "cross-env": "^7.0.3",
-    "npm-run-all": "^4.1.5",
     "tailwindcss": "^3.0.22",
     "typescript": "^4.1.2"
   },
