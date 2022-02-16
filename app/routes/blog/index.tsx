@@ -6,7 +6,7 @@ import type { Posts } from "~/types/post";
 
 export function headers () {
   return {
-    "Cache-Control": { headers: { "Cache-Control": "max-age: 1440, s-maxage=1440, stale-while-revalidate=10800, stale-if-error: 43200" } }
+    "Cache-Control": { headers: { "Cache-Control": "max-age: 600, s-maxage=600, stale-while-revalidate=3600, stale-if-error: 10800" } }
   };
 };
 
