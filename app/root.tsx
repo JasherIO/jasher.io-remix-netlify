@@ -15,8 +15,7 @@ import Footer from "~/components/Footer";
 import styles from "./tailwind.css";
 import { site, platforms } from "~/utilities/site";
 
-export const meta: MetaFunction = ({ location, params } : { location: any, params: any }) => {
-  // console.log(location, params);
+export const meta: MetaFunction = () => {
   const twitter = platforms.find(platform => platform.name === "Twitter");
 
   return { 
