@@ -1,6 +1,7 @@
 import { json, Link, useLoaderData } from "remix";
 import type { LoaderFunction } from "remix";
 import Main from "~/components/Main";
+import Section from "~/components/Section";
 import { get_posts } from "~/types/post";
 import type { Posts } from "~/types/post";
 
@@ -21,16 +22,18 @@ export default function Posts() {
 
   return (
     <Main>
-      <h1>Posts</h1>
-      <ul>
-        {posts.map((post : any) => (
-          <li key={post.frontmatter.title}>
-            <Link to={`/blog/${post.slug}`} prefetch="intent">
-              {post.frontmatter.title}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <Section>
+        <h1>Posts</h1>
+        <ul>
+          {posts.map((post : any) => (
+            <li key={post.frontmatter.title}>
+              <Link to={`/blog/${post.slug}`} prefetch="intent">
+                {post.frontmatter.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Section>
     </Main>
   );
 };
