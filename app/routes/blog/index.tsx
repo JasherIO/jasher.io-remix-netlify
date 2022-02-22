@@ -1,9 +1,15 @@
 import { json, Link, useLoaderData } from "remix";
-import type { LoaderFunction } from "remix";
-import Main from "~/components/Main";
+import type { MetaFunction, LoaderFunction } from "remix";
 import Section from "~/components/Section";
 import { get_posts } from "~/types/post";
 import type { Posts } from "~/types/post";
+
+export let meta: MetaFunction = () => {
+  return {
+    title: "Jasher | Blog",
+    description: "Posts from Jasher!"
+  };
+};
 
 export function headers () {
   return {
@@ -21,19 +27,17 @@ export default function Posts() {
   const posts = useLoaderData<Posts>();
 
   return (
-    <Main>
-      <Section>
-        <h1>Posts</h1>
-        <ul>
-          {posts.map((post : any) => (
-            <li key={post.frontmatter.title}>
-              <Link to={`/blog/${post.slug}`} prefetch="intent">
-                {post.frontmatter.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </Section>
-    </Main>
+    <Section>
+      <h1>Posts</h1>
+      <ul>
+        {posts.map((post : any) => (
+          <li key={post.frontmatter.title}>
+            <Link to={`/blog/${post.slug}`} prefetch="intent">
+              {post.frontmatter.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </Section>
   );
 };

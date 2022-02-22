@@ -1,7 +1,6 @@
 import { useLoaderData } from "remix";
 import type { MetaFunction, LoaderFunction } from "remix";
 import invariant from "tiny-invariant";
-import Main from "~/components/Main";
 import Section from "~/components/Section";
 import { get_post } from "~/types/post";
 import type { Post } from "~/types/post";
@@ -12,7 +11,7 @@ export const meta: MetaFunction = ({ data }) => {
   const twitter = platforms.find(platform => platform.name === "Twitter");
 
   return { 
-    title: frontmatter.title,
+    title: `Jasher | ${frontmatter.title}`,
     description: frontmatter.description,
     keywords: frontmatter.keywords.join(", "),
     "twitter:card": "summary",
@@ -36,18 +35,14 @@ export const loader: LoaderFunction = async ({ params }) => {
 };
 
 export default function Post() {
-  // const matches = useMatches();
-  // console.log(matches);
-  const { slug, frontmatter, html, stats } = useLoaderData<Post>();
+  const { frontmatter, html } = useLoaderData<Post>();
 
   return (
-    <Main>
-      <Section className="">
-        <article className="prose md:prose-lg dark:prose-invert prose-neutral mx-auto">
-          <h1>{frontmatter.title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: html }}></div>
-        </article>
-      </Section>
-    </Main>
+    <Section>
+      <article className="prose md:prose-lg dark:prose-invert prose-neutral mx-auto">
+        <h1>{frontmatter.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: html }}></div>
+      </article>
+    </Section>
   );
 };
