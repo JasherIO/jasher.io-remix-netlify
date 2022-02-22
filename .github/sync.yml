@@ -1,0 +1,4 @@
+JasherIO/JasherIO:
+  - source: posts/
+    dest: posts/
+    deleteOrphaned: true
