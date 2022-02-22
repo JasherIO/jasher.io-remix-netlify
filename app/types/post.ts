@@ -3,33 +3,34 @@ import { marked } from "marked";
 import reading_time from 'reading-time';
 
 type GH_Entry = {
-  name: string,
+  name: string;
   object: {
-    text: string
-  }
+    text: string;
+  };
 }
+type GH_Entries = Array<GH_Entry>;
 
 type Frontmatter = {
-  title: string,
-  description: string,
-  date: Date,
-  category: string,
-  tags?: Array<String>,
-  image?: string,
-  fullscreen?: boolean,
-  status?: string,
+  title: string;
+  description: string;
+  date: Date;
+  category: string;
+  tags?: Array<String>;
+  image?: string;
+  fullscreen?: boolean;
+  status?: string;
 }
 
 export type Post = {
-  slug: string,
-  frontmatter: Frontmatter,
-  html: string,
+  slug: string;
+  frontmatter: Frontmatter;
+  html: string;
   stats: {
-    text: string,
-    minutes: number,
-    time: number,
-    words: number,
-  },
+    text: string;
+    minutes: number;
+    time: number;
+    words: number;
+  };
 };
 export type Posts = Array<Post>;
 
@@ -61,7 +62,7 @@ const body = JSON.stringify({
   variables: { owner, name, expression } 
 });
 
-export async function get_posts() : Promise<Posts> {
+export async function get_posts(): Promise<Posts> {
   const { GITHUB_TOKEN } = process.env;
   if (!GITHUB_TOKEN)
     return [];
@@ -81,9 +82,9 @@ export async function get_posts() : Promise<Posts> {
     throw response;
 
   const json: any = await response.json();
-  const entries: Array<GH_Entry> = json?.data?.repository?.object?.entries;
-  const posts = entries.map(parse);
-  // const posts : Posts = await Promise.all(entries.map(_parse));
+  const entries: GH_Entries = json?.data?.repository?.object?.entries;
+  const posts: Posts = await Promise.all(entries.map(parse)); 
+  // const posts: Posts = await Promise.all(entries.map(_parse));
 
   return posts;
 };
@@ -135,7 +136,7 @@ export async function get_posts() : Promise<Posts> {
 //   };
 // }
 
-function parse(entry : GH_Entry) : Post {
+async function parse(entry : GH_Entry) : Promise<Post> {
   const { name } = entry;
   const slug = name.replace(".md", "");
 
