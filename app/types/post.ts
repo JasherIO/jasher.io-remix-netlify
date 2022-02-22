@@ -29,7 +29,8 @@ export type Post = {
 };
 export type Posts = Array<Post>;
 
-const posts_path = path.join(process.cwd(), "data/posts");
+// const posts_path = path.join(process.cwd(), "data/posts");
+const posts_path = path.join(__dirname, "../../../../data/posts");
 
 export async function get_posts(): Promise<Posts> {
   const directory = await fs.readdir(posts_path);
