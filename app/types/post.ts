@@ -63,15 +63,15 @@ const body = JSON.stringify({
 });
 
 export async function get_posts(): Promise<Posts> {
-  const { GITHUB_TOKEN } = process.env;
-  if (!GITHUB_TOKEN)
+  const { GITHUB_PERSONAL_ACCESS_TOKEN } = process.env;
+  if (!GITHUB_PERSONAL_ACCESS_TOKEN)
     return [];
 
   const response = await fetch(url, {
     method: "POST",
     headers: {
       "Accept": "application/json",
-      "Authorization": `Bearer ${GITHUB_TOKEN}`,
+      "Authorization": `Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}`,
       "Content-Type": "application/json",
       "User-Agent": "JasherIO", // https://docs.github.com/en/rest/overview/resources-in-the-rest-api#user-agent-required
     },
