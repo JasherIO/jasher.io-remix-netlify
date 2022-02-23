@@ -22,6 +22,7 @@ export const meta: MetaFunction = () => {
     title: site.title,
     description: site.description,
     keywords: site.keywords,
+    "theme-color": "#22c55e",
     "twitter:card": "summary",
     "twitter:creator": twitter?.id || "",
     "twitter:description": site.description,
