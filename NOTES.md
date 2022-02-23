@@ -4,7 +4,10 @@
 
 # Images
 
+- [MDN: Responsive images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)
 - [Remix Image](https://remix-image.mcfarl.in/)
+- [Unsplash: Supported Parameters](https://unsplash.com/documentation#supported-parameters)
+  - [imgix extension format](https://docs.imgix.com/apis/rendering/format/fm)
 
 # Remark
 
