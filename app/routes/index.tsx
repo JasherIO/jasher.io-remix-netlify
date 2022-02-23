@@ -1,5 +1,6 @@
 import { Link } from "remix";
-import type { LinksFunction, MetaFunction } from "remix";
+import type { MetaFunction } from "remix";
+import { Image, MimeType } from "remix-image";
 import Section from "~/components/Section";
 import { site } from "~/utilities/site";
 
@@ -58,24 +59,26 @@ export let meta: MetaFunction = () => {
   };
 };
 
-export let links: LinksFunction = () => {
-  return [
-    { rel: "preload", href: "/RetroGaming.jpg", as: "image" },
-  ];
-};
-
 export default function Index() {
   return (
     <main>
       <section className="w-full mx-auto">
         <div className="relative shadow-xl">
           <div className="absolute inset-0">
-            {/* https://unsplash.com/photos/p0j-mE6mGo4 */}
-            {/* https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images */}
-            <img
-              className="h-full w-full object-cover grayscale"
-              src="/RetroGaming.jpg" 
-              alt="People working on laptops"
+            <Image
+              loaderUrl="/api/image"
+              src="https://i.imgur.com/5cQnAQC.png"
+              // src="/RetroGaming.jpg"
+              alt="Retro Gaming"
+              responsive={[
+                { size: { width: 100, height: 100, }, maxWidth: 200, },
+                // { size: { width: 640, height: 426, }, maxWidth: 640, },
+                // { size: { width: 1920, height: 1280, }, maxWidth: 1920, },
+                // { size: { width: 2400, height: 1600, }, maxWidth: 2400, },
+                // { size: { width: 6048, height: 4032, }, maxWidth: 6048, },
+              ]}
+              options={{ contentType: MimeType.WEBP }}
+              // className="h-full w-full object-cover grayscale"
             />
             <div className="absolute inset-0 bg-green-500 dark:bg-green-900 mix-blend-multiply backdrop-blur-sm" />
           </div>
