@@ -3,7 +3,7 @@ import { Link, NavLink } from "remix";
 import { Disclosure, Listbox } from '@headlessui/react';
 import { DesktopComputerIcon, MenuIcon, MoonIcon, SunIcon, XIcon } from '@heroicons/react/outline';
 import { useIsomorphicLayoutEffect } from '~/hooks/useIsomorphicLayoutEffect';
-import { platforms, routes } from "~/utilities/site";
+import { platforms, routes } from "~/util/site";
 import clsx from "clsx";
 
 const _platforms = platforms.filter(platform => platform?.navbar);

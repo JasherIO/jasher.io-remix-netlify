@@ -3,7 +3,7 @@ import { Link } from "remix";
 import { AdvancedImage, responsive, placeholder } from '@cloudinary/react';
 import { Cloudinary } from "@cloudinary/url-gen";
 import { scale } from "@cloudinary/url-gen/actions/resize";
-import { site } from "~/utilities/site";
+import { site } from "~/util/site";
 
 export default function Hero() {
   const cloud = new Cloudinary({

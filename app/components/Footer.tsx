@@ -1,5 +1,5 @@
 import { Link } from "remix";
-import { platforms, routes } from "~/utilities/site";
+import { platforms, routes } from "~/util/site";
 
 const _platforms = platforms.filter(platform => platform?.footer);
 

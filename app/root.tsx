@@ -13,7 +13,7 @@ import _Error from "~/components/Error";
 import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
 import styles from "./tailwind.css";
-import { site, platforms } from "~/utilities/site";
+import { site, platforms } from "~/util/site";
 
 export const meta: MetaFunction = () => {
   const twitter = platforms.find(platform => platform.name === "Twitter");
