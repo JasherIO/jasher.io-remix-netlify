@@ -1,4 +1,4 @@
-import Section from "~/components/Section";
+import Section from "~/components/Layout/Section";
 import { AdvancedImage, responsive, placeholder } from '@cloudinary/react';
 import { Cloudinary } from "@cloudinary/url-gen";
 import { scale } from "@cloudinary/url-gen/actions/resize";

@@ -1,5 +1,5 @@
 import { Outlet } from "remix";
-import Main from "~/components/Main";
+import Main from "~/components/Layout/Main";
 
 export default function Blog() {
   return (

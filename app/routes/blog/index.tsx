@@ -1,6 +1,6 @@
 import { json, Link, useLoaderData } from "remix";
 import type { MetaFunction, LoaderFunction } from "remix";
-import Section from "~/components/Section";
+import Section from "~/components/Layout/Section";
 import { get_posts } from "~/types/post";
 import type { Posts } from "~/types/post";
 

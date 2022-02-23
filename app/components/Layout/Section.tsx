@@ -1,4 +1,4 @@
-import { classNames } from "~/utilities/classNames";
+import clsx from "clsx";
 
 type SectionProps = {
   children?: React.ReactNode,
@@ -10,7 +10,7 @@ export default function Section(props: SectionProps) {
   const base = "max-w-7xl mx-auto py-8 lg:py-14 px-4 sm:px-6 lg:px-8";
 
   return (
-    <section className={classNames(base, additional)} {..._props}>
+    <section className={clsx(base, additional)} {..._props}>
       {children}
     </section>
   )

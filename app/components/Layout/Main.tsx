@@ -1,4 +1,4 @@
-import { classNames } from "~/utilities/classNames";
+import clsx from "clsx";
 
 type MainProps = {
   children?: React.ReactNode,
@@ -10,7 +10,7 @@ export default function Main(props: MainProps) {
   const base = "mt-4";
 
   return (
-    <main className={classNames(base, additional)} {..._props}>
+    <main className={clsx(base, additional)} {..._props}>
       {children}
     </main>
   )

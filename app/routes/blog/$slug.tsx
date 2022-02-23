@@ -1,7 +1,7 @@
 import { useLoaderData } from "remix";
 import type { MetaFunction, LoaderFunction } from "remix";
 import invariant from "tiny-invariant";
-import Section from "~/components/Section";
+import Section from "~/components/Layout/Section";
 import { get_post } from "~/types/post";
 import type { Post } from "~/types/post";
 import { platforms } from "~/utilities/site";

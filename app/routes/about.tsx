@@ -1,6 +1,6 @@
 import { Outlet } from "remix";
 import type { MetaFunction } from "remix";
-import Main from "~/components/Main";
+import Main from "~/components/Layout/Main";
 
 /// https://remix.run/api/conventions#meta
 export let meta: MetaFunction = () => {
