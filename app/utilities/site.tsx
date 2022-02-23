@@ -36,6 +36,11 @@ type Platform = {
 }
 export const platforms: Array<Platform> = [
   {
+    name: "Battlefy",
+    id: "",
+    href: "",
+  },
+  {
     name: "Discord",
     id: "Jasher#1111",
     icon: (props: any) => (

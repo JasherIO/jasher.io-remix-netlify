@@ -20,6 +20,8 @@ export default function Navbar() {
                   className="h-7 w-7"
                   src="/Jasher.svg"
                   alt="Jasher Logo"
+                  height="28"
+                  width="28"
                 />
                 <p className="ml-4 text-lg text-semibold text-neutral-900 dark:text-neutral-100 hover:text-green-600 dark:hover:text-green-500">Jasher</p>
               </Link>
