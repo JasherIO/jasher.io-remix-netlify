@@ -6,6 +6,7 @@
   "scripts": {
     "build": "npm run build:css && remix build",
     "build:css": "tailwindcss -o ./app/tailwind.css --minify",
+    "clean": "rm -rf node_modules/ .cache/ .netlify/ public/build/",
     "dev": "cross-env NODE_ENV=development concurrently \"npm run dev:css\" \"netlify dev\"",
     "dev:css": "tailwindcss -o ./app/tailwind.css --watch",
     "postinstall": "remix setup node"
