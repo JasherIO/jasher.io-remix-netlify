@@ -4,6 +4,7 @@
 
 # Images
 
+- [Cloudinary: React SDK](https://cloudinary.com/documentation/react_quick_start#landingpage)
 - [MDN: Responsive images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)
 - [Remix Image](https://remix-image.mcfarl.in/)
 - [Unsplash: Supported Parameters](https://unsplash.com/documentation#supported-parameters)
