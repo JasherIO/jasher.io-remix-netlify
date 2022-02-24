@@ -79,7 +79,6 @@ function update() {
 
 function useTheme() {
   let [setting, setSetting] = useState('system');
-  // let initial = useRef(true);
 
   useIsomorphicLayoutEffect(() => {
     let theme = localStorage.theme
@@ -132,7 +131,7 @@ function useTheme() {
   return [setting, setSetting];
 };
 
-function Toggle({ panelClassName = 'mt-4' }) {
+function Toggle({ panelClassName = 'mt-2' }) {
   let [setting, setSetting] = useTheme();
 
   return (
@@ -204,13 +203,14 @@ export default function Navbar() {
                   ))}
                 </div>
                 
-                <div className="inline-flex ml-6 pl-6 text-neutral-500 border-l border-neutral-700 dark:border-neutral-700">
+                <div className="inline-flex ml-6 space-x-6 text-neutral-500 border-l border-neutral-700 dark:border-neutral-700">
                   <Toggle />
                   
                   {_platforms.map(platform => (
-                    <a key={platform.name} href={platform.href} target="_blank" rel="noreferrer">
+                    <a key={platform.name} href={platform.href} target="_blank" rel="noreferrer" className="group relative h-5 w-5">
                       <span className="sr-only">{platform.name}</span>
-                      <platform.icon className="ml-5 block h-5 w-5 hover:text-green-500" />
+                      <span className="invisible group-hover:visible mt-2 px-3 py-1 absolute z-50 top-full -translate-x-7 bg-white rounded-lg ring-1 ring-neutral-900/10 shadow-lg overflow-hidden text-sm text-neutral-900 font-semibold dark:bg-neutral-800 dark:ring-0 dark:highlight-white/5 dark:text-neutral-300">{platform.id}</span>
+                      <platform.icon className="group-hover:text-green-500" />
                     </a>
                   ))}
                 </div>
