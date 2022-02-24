@@ -45,7 +45,7 @@ export default function Post() {
 
   return (
     <Section>
-      <article className="prose md:prose-lg dark:prose-invert prose-neutral mx-auto">
+      <article className="prose md:prose-lg dark:prose-invert prose-neutral prose-a:text-green-500 mx-auto">
         <time dateTime={date.toISOString()}></time>
         <h1>{frontmatter.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: html }}></div>
