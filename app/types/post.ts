@@ -6,15 +6,29 @@ import parse_frontmatter from "front-matter";
 import reading_time from 'reading-time';
 import invariant from "tiny-invariant";
 
+type RawFrontmatter = {
+  title: string;
+  description: string;
+  keywords: Array<String>;
+  date: string;
+  category: string;
+  image?: string;
+  status?: string;
+};
+
 export type Frontmatter = {
   title: string;
   description: string;
   keywords: Array<String>;
-  date: Date;
+  date: {
+    raw: string;
+    text: string;
+    ISO: string;
+  };
   category: string;
   image?: string;
   status?: string;
-}
+};
 
 export type Post = {
   slug: string;
@@ -29,27 +43,50 @@ export type Post = {
 };
 export type Posts = Array<Post>;
 
-console.log(__dirname);
 const posts_path = path.join(__dirname, "data/posts");
+const date_compare = (a: Post, b: Post) => {
+  const a_date = new Date(a.frontmatter.date.raw);
+  const b_date = new Date(b.frontmatter.date.raw);
+
+  if (a_date < b_date)
+    return 1;
+  
+  if (b_date < a_date)
+    return -1
+
+  return 0;
+}
 
 export async function get_posts(): Promise<Posts> {
   const directory = await fs.readdir(posts_path);
-  return await Promise.all(directory.map(parse));
+  const posts = await Promise.all(directory.map(parse))
+  return posts
+    .filter(post => post.frontmatter?.status !== "draft")
+    .sort(date_compare);
 };
 
 export async function get_post(slug: string): Promise<Post> {
   return parse(`${slug}.md`);
 }
 
-function isValidFronmatter(attributes: any): attributes is Frontmatter {
+function isValidFronmatter(attributes: any): attributes is RawFrontmatter {
   return attributes?.title && attributes?.description && attributes?.keywords && attributes?.date && attributes?.category;
 }
 
 async function parse(file_name: string) : Promise<Post> {
   const file = await fs.readFile(path.join(posts_path, file_name));
   const slug = file_name.replace(".md", "");
-  const { attributes: frontmatter, body } = parse_frontmatter(file.toString());
-  invariant(isValidFronmatter(frontmatter), `${file_name} has bad frontmatter!`);
+  const { attributes: raw_frontmatter, body } = parse_frontmatter(file.toString());
+  invariant(isValidFronmatter(raw_frontmatter), `${file_name} has bad frontmatter!`);
+  
+  const options = { year: "numeric", month: "short", day: "numeric" };
+  const date_object = new Date(raw_frontmatter.date);
+  const date = {
+    raw: raw_frontmatter.date,
+    text: date_object.toLocaleDateString("en-US", options),
+    ISO: date_object.toISOString(),
+  };
+  const frontmatter = { ...raw_frontmatter, date };
   
   const html = marked(body);
   const stats = reading_time(body);

@@ -7,28 +7,27 @@ import type { Post } from "~/types/post";
 import { platforms } from "~/util/site";
 
 export const meta: MetaFunction = ({ data }) => {
-  const { frontmatter } = data;
+  const post = data;
   const twitter = platforms.find(platform => platform.name === "Twitter");
-  const date = new Date(frontmatter.date);
 
   return { 
-    title: `Jasher | ${frontmatter.title}`,
-    description: frontmatter.description,
-    keywords: frontmatter.keywords.join(", "),
-    thumbnail: frontmatter.image,
-    pubdate: date.toISOString(),
+    title: `Jasher | ${post.frontmatter.title}`,
+    description: post.frontmatter.description,
+    keywords: post.frontmatter.keywords.join(", "),
+    thumbnail: post.frontmatter.image,
+    pubdate: post.frontmatter.date.ISO,
     "twitter:card": "summary_large_image",
     "twitter:creator": twitter?.id || "",
-    "twitter:description": frontmatter.description,
-    "twitter:image": frontmatter.image,
+    "twitter:description": post.frontmatter.description,
+    "twitter:image": post.frontmatter.image,
     "twitter:site": twitter?.id || "",
-    "twitter:title": frontmatter.title,
-    "og:description": frontmatter.description,
-    "og:image": frontmatter.image,
+    "twitter:title": post.frontmatter.title,
+    "og:description": post.frontmatter.description,
+    "og:image": post.frontmatter.image,
     "og:image:width": "1920",
     "og:image:height": "1080",
-    "og:pubdate": date.toISOString(),
-    "og:title": frontmatter.title,
+    "og:pubdate": post.frontmatter.date.ISO,
+    "og:title": post.frontmatter.title,
     "og:type": "article",
     // "og:url": "",
   };
@@ -40,15 +39,14 @@ export const loader: LoaderFunction = async ({ params }) => {
 };
 
 export default function Post() {
-  const { frontmatter, html } = useLoaderData<Post>();
-  const date = new Date(frontmatter.date);
+  const post = useLoaderData<Post>();
 
   return (
     <Section>
-      <article className="prose md:prose-lg dark:prose-invert prose-neutral prose-a:text-green-500 mx-auto selection:bg-green-300 selection:text-green-900">
-        <time dateTime={date.toISOString()}></time>
-        <h1>{frontmatter.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: html }}></div>
+      <article className="max-w-3xl mx-auto selection:bg-green-300 selection:text-green-900 prose md:prose-lg dark:prose-invert prose-neutral prose-a:text-green-500 prose-li:my-0.5 md:prose-li:my-0.5">
+        <time dateTime={post.frontmatter.date.ISO}></time>
+        <h1>{post.frontmatter.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: post.html }}></div>
       </article>
     </Section>
   );
