@@ -43,7 +43,7 @@ export type Post = {
 };
 export type Posts = Array<Post>;
 
-const posts_path = path.join(__dirname, "data/posts");
+const posts_path = path.join(__dirname, "../../../", "data/posts");
 const date_compare = (a: Post, b: Post) => {
   const a_date = new Date(a.frontmatter.date.raw);
   const b_date = new Date(b.frontmatter.date.raw);
@@ -69,7 +69,7 @@ export async function get_post(slug: string): Promise<Post> {
   return parse(`${slug}.md`);
 }
 
-function isValidFronmatter(attributes: any): attributes is RawFrontmatter {
+function isValidFrontmatter(attributes: any): attributes is RawFrontmatter {
   return attributes?.title && attributes?.description && attributes?.keywords && attributes?.date && attributes?.category;
 }
 
@@ -77,7 +77,7 @@ async function parse(file_name: string) : Promise<Post> {
   const file = await fs.readFile(path.join(posts_path, file_name));
   const slug = file_name.replace(".md", "");
   const { attributes: raw_frontmatter, body } = parse_frontmatter(file.toString());
-  invariant(isValidFronmatter(raw_frontmatter), `${file_name} has bad frontmatter!`);
+  invariant(isValidFrontmatter(raw_frontmatter), `${file_name} has bad frontmatter!`);
   
   const options = { year: "numeric", month: "short", day: "numeric" };
   const date_object = new Date(raw_frontmatter.date);

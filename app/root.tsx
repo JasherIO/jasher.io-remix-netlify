@@ -9,10 +9,10 @@ import {
   useCatch
 } from "remix";
 import type { LinksFunction, MetaFunction } from "remix";
-import _Error from "~/components/Error";
-import Navbar from "~/components/Navbar";
-import Footer from "~/components/Footer";
 import styles from "./tailwind.css";
+import _Error from "~/components/Error";
+import Footer from "~/components/Footer";
+import Navbar from "~/components/Navbar";
 import { site, platforms } from "~/util/site";
 
 export const meta: MetaFunction = () => {
