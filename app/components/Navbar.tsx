@@ -188,7 +188,7 @@ export default function Navbar() {
                   height="28"
                   width="28"
                 />
-                <p className="ml-4 text-lg text-semibold text-neutral-900 dark:text-neutral-100 hover:text-green-600 dark:hover:text-green-500">Jasher</p>
+                <p className="ml-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100 hover:text-green-600 dark:hover:text-green-500">Jasher</p>
               </Link>
             
               <div className="absolute right-0 hidden md:flex md:items-center">
