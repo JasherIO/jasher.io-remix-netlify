@@ -18,7 +18,12 @@ export function headers () {
   };
 };
 
-export const loader: LoaderFunction = async () => {
+export const loader: LoaderFunction = async ({ request }) => {
+  const url = new URL(request.url);
+  const limit = url.searchParams.get("limit");
+  const offset = url.searchParams.get("offset");
+  console.log(request, request.url, limit, offset);
+
   const posts = await get_posts();
 
   return json(posts, { headers: { "Cache-Control": "max-age: 60, s-maxage=60, stale-while-revalidate=300, stale-if-error: 600" } });
@@ -32,7 +37,7 @@ export default function Posts() {
       <h1 className="sr-only">Posts</h1>
       {posts.map((post: Post, index: number) => (
         <article key={post.frontmatter.title} className={clsx("rounded-lg p-2", index > 0 && "mt-8")}>
-          <span className="text-green-500 font-semibold mb-1">{post.frontmatter.category}</span>
+          <span className="text-green-600 dark:text-green-400 font-semibold mb-1">{post.frontmatter.category}</span>
           <Link to={`/blog/${post.slug}`} prefetch="intent">
             <h2 className="text-2xl md:text-4xl font-bold mt-1 mb-1">{post.frontmatter.title}</h2>
             <p className="text-base md:text-lg text-neutral-700 dark:text-neutral-400 mb-1">{post.frontmatter.description}</p>
