@@ -30,23 +30,22 @@ export default function Posts() {
   return (
     <Section>
       <h1 className="sr-only">Posts</h1>
-      <div className="max-w-3xl mx-auto prose prose-neutral dark:prose-invert prose-a:no-underline prose-h2:mb-2 prose-h2:mt-0 prose-p:mb-0 md:prose-lg md:prose-h2:mb-2 md:prose-h2:mt-0 md:prose-p:mb-0">
-        {posts.map((post: Post, index: number) => (
-          <Link to={`/blog/${post.slug}`} prefetch="intent" key={post.frontmatter.title}>
-            <article className={clsx("rounded-lg hover:bg-neutral-200 dark:hover:bg-neutral-800 p-2 md:p-6", index > 0 && "mt-8")}>
-              <h2>{post.frontmatter.title}</h2>
-              <p className="text-neutral-700 dark:text-neutral-400">{post.frontmatter.description}</p>
-              <span className="text-sm md:text-base uppercase tracking-wide text-neutral-500 space-x-2">
-                <span>{post.stats.text}</span>
-                <span>&bull;</span>
-                <time dateTime={post.frontmatter.date.ISO}>
-                  {post.frontmatter.date.text}
-                </time>
-              </span>
-            </article>
+      {posts.map((post: Post, index: number) => (
+        <article key={post.frontmatter.title} className={clsx("rounded-lg p-2", index > 0 && "mt-8")}>
+          <span className="text-green-500 font-semibold mb-1">{post.frontmatter.category}</span>
+          <Link to={`/blog/${post.slug}`} prefetch="intent">
+            <h2 className="text-2xl md:text-4xl font-bold mt-1 mb-1">{post.frontmatter.title}</h2>
+            <p className="text-base md:text-lg text-neutral-700 dark:text-neutral-400 mb-1">{post.frontmatter.description}</p>
           </Link>
-        ))}
-      </div>
+          <span className="text-sm md:text-base text-neutral-500 font-semibold space-x-2">
+            <span>{post.stats.text}</span>
+            <span>&bull;</span>
+            <time dateTime={post.frontmatter.date.ISO}>
+              {post.frontmatter.date.text}
+            </time>
+          </span>
+        </article>
+      ))}
     </Section>
   );
 };
