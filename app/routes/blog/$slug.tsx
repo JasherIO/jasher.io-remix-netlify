@@ -43,10 +43,17 @@ export default function Post() {
 
   return (
     <Section>
-      <article className="max-w-3xl mx-auto selection:bg-green-300 selection:text-green-900 prose md:prose-lg dark:prose-invert prose-neutral prose-a:text-green-500 prose-li:my-0.5 md:prose-li:my-0.5">
-        <time dateTime={post.frontmatter.date.ISO}></time>
-        <h1>{post.frontmatter.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: post.html }}></div>
+      <article className="p-2">
+        <span className="text-base md:text-lg text-green-500 font-semibold">{post.frontmatter.category}</span>
+        <h1 className="text-3xl md:text-5xl font-bold my-1">{post.frontmatter.title}</h1>
+        <span className="text-base text-neutral-500 font-semibold space-x-2">
+          <span>{post.stats.text}</span>
+          <span>&bull;</span>
+          <time dateTime={post.frontmatter.date.ISO}>
+            {post.frontmatter.date.text}
+          </time>
+        </span>
+        <div className="max-w-none mx-auto mt-4 selection:bg-green-300 selection:text-green-900 prose md:prose-lg dark:prose-invert prose-neutral prose-a:text-green-500 prose-li:my-0.5 md:prose-li:my-0.5 prose-h1:mb-0 md:prose-h1:mb-2" dangerouslySetInnerHTML={{ __html: post.html }}></div>
       </article>
     </Section>
   );
