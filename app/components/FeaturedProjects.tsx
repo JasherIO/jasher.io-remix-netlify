@@ -42,7 +42,7 @@ export default function FeaturedProjects() {
   });
 
   return (
-    <Section>
+    <Section className="max-w-7xl mx-auto">
       <p className="text-center text-sm sm:text-base font-semibold uppercase text-neutral-500 tracking-wide">
         Featured Projects
       </p>

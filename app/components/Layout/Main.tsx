@@ -7,7 +7,7 @@ type MainProps = {
 
 export default function Main(props: MainProps) {
   const { children, className: additional, ..._props } = props;
-  const base = "mt-4";
+  const base = "max-w-4xl mx-auto";
 
   return (
     <main className={clsx(base, additional)} {..._props}>
