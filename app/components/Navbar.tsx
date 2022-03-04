@@ -175,7 +175,7 @@ function Toggle({ panelClassName = 'mt-2' }) {
 
 export default function Navbar() {
   return (
-    <Disclosure as="nav">
+    <Disclosure as="nav" role="banner" aria-labelledby="navbar">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
