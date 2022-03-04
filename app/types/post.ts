@@ -41,7 +41,16 @@ export type Post = {
     words: number;
   };
 };
-export type Posts = Array<Post>;
+
+export type Posts = {
+  pagination: {
+    limit: number;
+    offset: number;
+    page: number;
+    totalPages: number;
+  };
+  posts: Array<Post>
+};
 
 const posts_path = path.join(__dirname, "data/posts");
 const date_compare = (a: Post, b: Post) => {
@@ -57,12 +66,25 @@ const date_compare = (a: Post, b: Post) => {
   return 0;
 }
 
-export async function get_posts(): Promise<Posts> {
+export async function get_posts({ limit, offset}: { limit: number, offset: number }): Promise<Posts> {
   const directory = await fs.readdir(posts_path);
-  const posts = await Promise.all(directory.map(parse))
-  return posts
-    .filter(post => post.frontmatter?.status !== "draft")
-    .sort(date_compare);
+  const parsed = await Promise.all(directory.map(parse));
+  const posts = parsed
+                  .filter(post => post.frontmatter?.status !== "draft")
+                  .sort(date_compare)
+                  .slice(offset, offset + limit);
+  const page = offset > 0 ? Math.floor(offset / limit) + 1 : 1;
+  const totalPages = Math.ceil(parsed.length / limit);
+  
+  return {
+    pagination: {
+      limit,
+      offset,
+      page,
+      totalPages
+    },
+    posts
+  };
 };
 
 export async function get_post(slug: string): Promise<Post> {
@@ -79,7 +101,7 @@ async function parse(file_name: string) : Promise<Post> {
   const { attributes: raw_frontmatter, body } = parse_frontmatter(file.toString());
   invariant(isValidFronmatter(raw_frontmatter), `${file_name} has bad frontmatter!`);
   
-  const options = { year: "numeric", month: "short", day: "numeric" };
+  const options: Intl.DateTimeFormatOptions = { year: "numeric", month: "short", day: "numeric" };
   const date_object = new Date(raw_frontmatter.date);
   const date = {
     raw: raw_frontmatter.date,
